@@ -1,0 +1,7 @@
+fenics==2019.1.0
+meshio
+gmsh
+torch
+numpy
+scikit-learn
+matplotlib
