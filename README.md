@@ -101,3 +101,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ---
+
+
+
+
+The goal: simulating a pressure vessel using open-source tools like Gmsh, FEniCS, and building a PINN with PyTorch. I'll emphasize the PINN's difference: training directly on elasticity PDEs rather than pre-computed data. Necessary imports are already prepared. Part 1, the Gmsh mesh generation, will use a function for robust geometry definition with physical groups. This function will save the mesh in a FEniCS-compatible format, with clear calls to the function included.
+
+Defining the FEniCS Solver: developing the FEniCS ground truth simulation. I've designed the solve_with_fenics function, ensuring it reads the Gmsh-generated mesh and boundary data, sets up the standard linear elasticity problem, and defines the crucial boundary conditions for pressure and fixed support. The function will also calculate and return the von Mises stress for thorough analysis. My next step involves testing this solver with a specific pressure and visualizing the displacement and stress fields.
+
+Implementing Loss Functions (PINN's loss function): PDE loss using automatic differentiation to enforce the Navier-Cauchy equations, and boundary condition losses for the fixed support and pressure. I'm leveraging PyTorch's autograd.grad for derivative calculations. I'll thoroughly test each loss term individually to ensure correctness.
+
+Developing the FEniCS Solver: Immersed in developing the FEniCS solver, a crucial step. I've successfully designed the solve_with_fenics function, ensuring it accurately reads the Gmsh-generated mesh and boundary data. This solver, complete with boundary conditions for pressure and fixed support, will serve as my ground truth. The implementation includes calculating and returning the von Mises stress for a thorough analysis.
+
+Constructing the PINN Loss Function: Focusing on defining the crucial pinn_loss_function. I'm developing the PDE residual term using torch.autograd.grad to enforce the Navier-Cauchy equations. Simultaneously, I'm working on the boundary condition losses, ensuring accurate implementation for both the fixed support and pressure-loaded boundaries. The total loss will be a weighted sum of these components.
