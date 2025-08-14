@@ -103,6 +103,42 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 
+        ┌───────────────┐
+        │  Geometry &   │
+        │   Meshing     │
+        │   (Gmsh)      │
+        └───────┬───────┘
+                │ .xdmf mesh
+                ▼
+        ┌───────────────┐
+        │  Simulation    │
+        │  (FEniCS FEM) │
+        └───────┬───────┘
+                │ displacement snapshots
+                ▼
+        ┌───────────────┐
+        │   POD Basis   │
+        │ (SVD on data) │
+        └───────┬───────┘
+                │ reduced coefficients
+                ▼
+        ┌───────────────┐
+        │ Surrogate ML  │
+        │   (POD+PINN)  │
+        └───────┬───────┘
+                │ predicted coeffs
+                ▼
+        ┌───────────────┐
+        │ Reconstruction │
+        │ (POD basis * c)│
+        └───────┬────────┘
+                │ displacement field
+                ▼
+        ┌───────────────┐
+        │ Visualization │
+        │ Matplotlib /  │
+        │   ParaView    │
+        └───────────────┘
 
 
 The goal: simulating a pressure vessel using open-source tools like Gmsh, FEniCS, and building a PINN with PyTorch. I'll emphasize the PINN's difference: training directly on elasticity PDEs rather than pre-computed data. Necessary imports are already prepared. Part 1, the Gmsh mesh generation, will use a function for robust geometry definition with physical groups. This function will save the mesh in a FEniCS-compatible format, with clear calls to the function included.
